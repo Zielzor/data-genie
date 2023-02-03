@@ -12,14 +12,18 @@ def filter_data():
             temp.seek(0)
             data = pd.read_csv(temp.name) if temp.name.endswith(".csv") else pd.read_excel(temp.name)
             column_names = data.columns.tolist()
-            selected_column = st.selectbox("Select a column to filter by", column_names)
-            show_all = st.checkbox("Show all values of selected column")
+            selected_columns = st.multiselect("Select columns to filter by", column_names)
+            show_all = st.checkbox("Show all values of selected columns")
             if show_all:
-                st.write(data[selected_column])
+                st.write(data[selected_columns])
             else:
-                value_to_filter = st.text_input("Enter a value to filter by")
+                selected_values = []
+                for column in selected_columns:
+                    selected_values.append((column, st.text_input(f"Enter a value to filter by in {column}")))
                 if st.button("Filter"):
-                    filtered_data = data[data[selected_column] == value_to_filter]
+                    filtered_data = data.copy()
+                    for column, value in selected_values:
+                        filtered_data = filtered_data[filtered_data[column] == value]
                     st.dataframe(filtered_data)
 
 if __name__ == '__main__':
