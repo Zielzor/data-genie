@@ -3,16 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns 
-import statsmodels as sm 
-import pylab as pl 
-from scipy import stats
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-from sklearn import preprocessing 
-from sklearn import cluster, tree, decomposition
-from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt 
-import pydot 
 
 # Function to get or create session state
 def get_session_state():
